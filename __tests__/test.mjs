@@ -1,9 +1,10 @@
 import { describe, it, expect } from '@jest/globals';
 import * as client from '../src/clients/clients.mjs';
 
-describe('GET', () => {
-	it('Should return a error message when item does not exist', async () => {
-		const result = await client.getUsers();
-		expect(result.body).toBeDefined();
+describe('API V1', () => {
+	it('Should return correct message', async () => {
+		const result = await client.getApi();
+		const expectedResult = JSON.parse(result.text);
+		expect(expectedResult.message).toEqual('API V1');
 	});
 });
