@@ -1,7 +1,9 @@
 import * as superagent from 'superagent';
+import 'dotenv/config';
 
 const agent = superagent.agent();
+const baseUrl = process.env.BASE_URL;
 
 export const getApi = async () => {
-	return await agent.get('https://backend-api-garden-guru.vercel.app/api/v1/');
+	return await agent.get(baseUrl);
 };
