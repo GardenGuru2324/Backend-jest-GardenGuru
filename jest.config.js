@@ -61,10 +61,10 @@ const config = {
 	// forceCoverageMatch: [],
 
 	// A path to a module which exports an async function that is triggered once before all test suites
-	//globalSetup: './src/database/globalSetup.mjs',
+	globalSetup: './src/database/globalSetup.mjs',
 
 	//A path to a module which exports an async function that is triggered once after all test suites
-	//globalTeardown: './src/database/globalTeardown.mjs',
+	globalTeardown: './src/database/globalTeardown.mjs',
 
 	// A set of global variables that need to be available in all test environments
 	// globals: {},
