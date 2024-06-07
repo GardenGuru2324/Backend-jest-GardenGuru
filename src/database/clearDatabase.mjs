@@ -4,8 +4,6 @@ import 'dotenv/config';
 const agent = superagent.agent();
 const baseUrl = process.env.BASE_URL;
 
-const globalSetup = async () => {
-	return await agent.get(`${baseUrl}/initializeDatabase`);
+export const clearDatabase = async (tableName) => {
+	return await agent.get(`${baseUrl}/${tableName}/clearDatabase`);
 };
-
-export default globalSetup;

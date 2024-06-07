@@ -61,10 +61,10 @@ const config = {
 	// forceCoverageMatch: [],
 
 	// A path to a module which exports an async function that is triggered once before all test suites
-	globalSetup: './src/database/globalSetup.mjs',
+	//globalSetup: './src/database/globalSetup.mjs',
 
 	//A path to a module which exports an async function that is triggered once after all test suites
-	globalTeardown: './src/database/globalTeardown.mjs',
+	//globalTeardown: './src/database/globalTeardown.mjs',
 
 	// A set of global variables that need to be available in all test environments
 	// globals: {},
@@ -147,7 +147,7 @@ const config = {
 	// ],
 
 	// Allows you to use a custom runner instead of Jest's default test runner
-	//runner: 'jest-serial-runner',
+	runner: 'jest-serial-runner',
 
 	// The paths to modules that run some code to configure or set up the testing environment before each test
 	// setupFiles: [],
