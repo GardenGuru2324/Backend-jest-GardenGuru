@@ -5,7 +5,8 @@ import { clearDatabase } from "../../src/database/clearDatabase.mjs";
 import {
   objectStatusCodes,
   objectMessages,
-} from "../../src/lib/deletePlant/getPlantsObjects.mjs";
+  objectData,
+} from "../../src/lib/getPlants/getPlantsObjects.mjs";
 
 describe("Get plants of user", () => {
   beforeAll(async () => {
@@ -32,6 +33,18 @@ describe("Get plants of user", () => {
       const result = JSON.parse(response.text);
 
       expect(result.message).toEqual(obj.expect);
+    });
+  });
+
+  objectData.forEach((obj) => {
+    it(`Should ${obj.it}`, async () => {
+      const response = await client.getAllPlantsOfUser(obj.userId);
+      const result = JSON.parse(response.text);
+      let resultPlants = [];
+
+      result.find((plant) => resultPlants.push(plant.plantId));
+
+      expect(resultPlants).toEqual(obj.expect);
     });
   });
 });
