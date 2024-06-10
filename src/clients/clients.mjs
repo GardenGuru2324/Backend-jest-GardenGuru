@@ -17,3 +17,9 @@ export const deletePlantOfUser = async (userId, plantId) => {
 		return error.response;
 	});
 };
+
+export const loginUser = async (user) => {
+	return await agent.post(`${baseUrl}/login`).send(user).catch((error) => {
+		return error.response;
+	});
+};
