@@ -1,3 +1,4 @@
 export const succesMessages = {
-	SuccesfullyDeletePlant: 'Plant successfully deleted'
+  succesfullyGetPlants: "Plants succesfully fetched",
+  SuccesfullyDeletePlant: "Plant successfully deleted",
 };
