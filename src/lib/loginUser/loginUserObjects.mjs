@@ -1,5 +1,4 @@
 import { errorMessages } from "../../errors/errors.mjs";
-import { succesMessages } from "../../messages/messages.mjs";
 
 export const objectLoginSuccesUser = [
 	{
@@ -38,12 +37,34 @@ export const objectMessages = [
 			password: "rongPassword"
 		},
 		expect: errorMessages.wrongPassword
+	},
+	{
+		it: "not login an user when email is missing and returns correct message",
+		user: {
+			password: "rongPassword"
+		},
+		expect: errorMessages.emailRequired
+	},
+	{
+		it: "not login an user when password is missing and returns correct message",
+		user: {
+			email: "jest_user_1@example.com"
+		},
+		expect: errorMessages.passwordRequired
 	}
 ];
 
 export const objectStatusCode = [
 	{
-		it: "not login an user when email is wrong and returns correct message",
+		it: "not login an user when passwrod is wrong and returns correct statusCode",
+		user: {
+			email: "jest_user_1@example.com",
+			password: "admin123"
+		},
+		expect: 200
+	},
+	{
+		it: "not login an user when email is wrong and returns correct statusCode",
 		user: {
 			email: "jest_user_nonExistingUser@example.com",
 			password: "admin123"
@@ -51,11 +72,25 @@ export const objectStatusCode = [
 		expect: 404
 	},
 	{
-		it: "not login an user when passwrod is wrong and returns correct message",
+		it: "not login an user when passwrod is wrong and returns correct statusCode",
 		user: {
 			email: "jest_user_1@example.com",
 			password: "rongPassword"
 		},
 		expect: 401
+	},
+	{
+		it: "not login an user when email is missing and returns correct statusCode",
+		user: {
+			password: "rongPassword"
+		},
+		expect: 409
+	},
+	{
+		it: "not login an user when password is missing and returns correct statusCode",
+		user: {
+			email: "jest_user_1@example.com"
+		},
+		expect: 409
 	}
 ];
