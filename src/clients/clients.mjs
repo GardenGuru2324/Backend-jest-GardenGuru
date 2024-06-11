@@ -13,7 +13,9 @@ export const getAllPlants = async () => {
 };
 
 export const getAllPlantsOfUser = async (userId) => {
-  return await agent.get(`${baseUrl}/user/${userId}/plants`);
+  return await agent.get(`${baseUrl}/user/${userId}/plants`).catch((error) => {
+    return error.response;
+  });
 };
 
 export const deletePlantOfUser = async (userId, plantId) => {

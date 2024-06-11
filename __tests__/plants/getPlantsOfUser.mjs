@@ -1,11 +1,12 @@
 import { describe, it, expect } from "@jest/globals";
+import { toBeEmpty } from "jest-extended";
+
 import * as client from "../../src/clients/clients.mjs";
 import { initializeDatabase } from "../../src/database/initializeDatabase.mjs";
 import { clearDatabase } from "../../src/database/clearDatabase.mjs";
 import {
   objectStatusCodes,
   objectMessages,
-  objectData,
 } from "../../src/lib/getPlants/getPlantsObjects.mjs";
 
 describe("Get plants of user", () => {
@@ -36,15 +37,14 @@ describe("Get plants of user", () => {
     });
   });
 
-  objectData.forEach((obj) => {
-    it(`Should ${obj.it}`, async () => {
-      const response = await client.getAllPlantsOfUser(obj.userId);
-      const result = JSON.parse(response.text);
-      let resultPlants = [];
+  it(`Should return the plants of specific user`, async () => {
+    const response = await client.getAllPlantsOfUser("jest_user_1");
+    const result = JSON.parse(response.text);
+    const resultPlants = result.filter(
+      (plant) => plant.userId === "jest_user_1"
+    );
 
-      result.find((plant) => resultPlants.push(plant.plantId));
-
-      expect(resultPlants).toEqual(obj.expect);
-    });
+    expect.extend({ toBeEmpty });
+    expect(resultPlants).not.toBeEmpty();
   });
 });

@@ -8,7 +8,7 @@
 const config = {
 	// All imported modules in your __tests__ should be mocked automatically
 	// automock: false,
-	testTimeout: 10000,
+	testTimeout: 7000,
 	// Stop running __tests__ after `n` failures
 	// bail: 0,
 
