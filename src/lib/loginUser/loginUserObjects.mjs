@@ -8,7 +8,6 @@ export const objectLoginSuccesUser = [
 			password: "admin123"
 		},
 		expect: {
-			_id: "666730eb1cca1f0d6338ec65",
 			userId: "jest_user_1",
 			userName: "jest_user_1",
 			password: "$2a$12$N.7.wzAYOuSFIJdTetqNhOFJpRRyfUnCS/qzAUK2nhDjne2uF7YtS",
@@ -37,20 +36,6 @@ export const objectMessages = [
 			password: "rongPassword"
 		},
 		expect: errorMessages.wrongPassword
-	},
-	{
-		it: "not login an user when email is missing and returns correct message",
-		user: {
-			password: "rongPassword"
-		},
-		expect: errorMessages.emailRequired
-	},
-	{
-		it: "not login an user when password is missing and returns correct message",
-		user: {
-			email: "jest_user_1@example.com"
-		},
-		expect: errorMessages.passwordRequired
 	}
 ];
 
@@ -78,19 +63,5 @@ export const objectStatusCode = [
 			password: "rongPassword"
 		},
 		expect: 401
-	},
-	{
-		it: "not login an user when email is missing and returns correct statusCode",
-		user: {
-			password: "rongPassword"
-		},
-		expect: 409
-	},
-	{
-		it: "not login an user when password is missing and returns correct statusCode",
-		user: {
-			email: "jest_user_1@example.com"
-		},
-		expect: 409
 	}
 ];

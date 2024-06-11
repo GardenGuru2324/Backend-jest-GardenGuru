@@ -4,11 +4,11 @@ import { initializeDatabase } from "../../src/database/initializeDatabase.mjs";
 import { clearDatabase } from "../../src/database/clearDatabase.mjs";
 import {
 	objectMessages,
-	objectStatusCode,
-	objectLoginSuccesUser
-} from "../../src/lib/loginUser/loginUserObjects.mjs";
+	objectRegsiterSuccesUser,
+	objectStatusCode
+} from "../../src/lib/registerUser/registerUserObjects.mjs";
 
-describe("Login user", () => {
+describe("Register user", () => {
 	beforeAll(async () => {
 		await initializeDatabase("Users");
 	});
@@ -17,19 +17,22 @@ describe("Login user", () => {
 		await clearDatabase("Users");
 	});
 
-	objectLoginSuccesUser.forEach((obj) => {
-		it(`Should ${obj.it}`, async () => {
-			const result = await client.loginUser(obj.user);
+	objectRegsiterSuccesUser.forEach((obj) => {
+		// Werkt maar wil de database niet vervuilen om de 2 weken laten runnen!
+		it.skip(`Should ${obj.it}`, async () => {
+			const result = await client.registerUser(obj.newUser);
 
 			const expectedResult = JSON.parse(result.text);
 
-			expect(expectedResult).toEqual(expect.objectContaining(obj.expect));
+			expect(expectedResult.email).toEqual(obj.expect.email);
+			expect(expectedResult.fullName).toEqual(obj.expect.fullName);
+			expect(result.statusCode).toBe(obj.expect.statusCode);
 		});
 	});
 
 	objectMessages.forEach((obj) => {
 		it(`Should ${obj.it}`, async () => {
-			const result = await client.loginUser(obj.user);
+			const result = await client.registerUser(obj.newUser);
 
 			const expectedResult = JSON.parse(result.text);
 
@@ -39,7 +42,7 @@ describe("Login user", () => {
 
 	objectStatusCode.forEach((obj) => {
 		it(`Should ${obj.it}`, async () => {
-			const result = await client.loginUser(obj.user);
+			const result = await client.registerUser(obj.newUser);
 
 			expect(result.statusCode).toEqual(obj.expect);
 		});
