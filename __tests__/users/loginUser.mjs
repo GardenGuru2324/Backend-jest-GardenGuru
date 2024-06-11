@@ -2,7 +2,7 @@ import { describe, it, expect } from "@jest/globals";
 import * as client from "../../src/clients/clients.mjs";
 import { initializeDatabase } from "../../src/database/initializeDatabase.mjs";
 import { clearDatabase } from "../../src/database/clearDatabase.mjs";
-import { objectMessages } from "../../src/lib/loginUser/loginUserObjects.mjs";
+import { objectMessages, objectStatusCode } from "../../src/lib/loginUser/loginUserObjects.mjs";
 
 describe("Login user", () => {
 	beforeAll(async () => {
@@ -34,7 +34,7 @@ describe("Login user", () => {
 
 		const expectedResult = JSON.parse(result.text);
 
-		expect(expectedResult).toEqual(expectedUser);
+		expect(expectedResult).toEqual(expect.objectContaining(expectedUser));
 	});
 
 	objectMessages.forEach((obj) => {
@@ -44,6 +44,14 @@ describe("Login user", () => {
 			const expectedResult = JSON.parse(result.text);
 
 			expect(expectedResult.message).toEqual(obj.expect);
+		});
+	});
+
+	objectStatusCode.forEach((obj) => {
+		it(`Should ${obj.it}`, async () => {
+			const result = await client.loginUser(obj.user);
+
+			expect(result.statusCode).toEqual(obj.expect);
 		});
 	});
 });

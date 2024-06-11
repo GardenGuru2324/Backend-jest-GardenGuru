@@ -24,20 +24,38 @@ export const objectLoginSuccesUser = [
 
 export const objectMessages = [
 	{
-		it: "not login an user when user does not exist",
+		it: "not login an user when email is wrong and returns correct message",
 		user: {
 			email: "jest_user_nonExistingUser@example.com",
 			password: "admin123"
 		},
 		expect: errorMessages.userNotFound
+	},
+	{
+		it: "not login an user when passwrod is wrong and returns correct message",
+		user: {
+			email: "jest_user_1@example.com",
+			password: "rongPassword"
+		},
+		expect: errorMessages.wrongPassword
 	}
 ];
 
 export const objectStatusCode = [
 	{
-		it: "",
-		userId: "",
-		plantId: "",
-		expect: 200
+		it: "not login an user when email is wrong and returns correct message",
+		user: {
+			email: "jest_user_nonExistingUser@example.com",
+			password: "admin123"
+		},
+		expect: 404
+	},
+	{
+		it: "not login an user when passwrod is wrong and returns correct message",
+		user: {
+			email: "jest_user_1@example.com",
+			password: "rongPassword"
+		},
+		expect: 401
 	}
 ];

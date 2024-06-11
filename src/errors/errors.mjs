@@ -1,5 +1,6 @@
 export const errorMessages = {
-	userNotFound: 'User not found',
+	userNotFound: "User not found",
 	plantNotFound:
-		'Plant not found. Please verify the plant ID and try again. Note: You may not be the owner of this plant.'
+		"Plant not found. Please verify the plant ID and try again. Note: You may not be the owner of this plant.",
+	wrongPassword: "Wrong password. Please try again!"
 };
