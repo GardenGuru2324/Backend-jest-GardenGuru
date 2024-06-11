@@ -24,7 +24,7 @@ export const objectLoginSuccesUser = [
 
 export const objectMessages = [
 	{
-		it: "an login an user when user does not exist",
+		it: "not login an user when user does not exist",
 		user: {
 			email: "jest_user_nonExistingUser@example.com",
 			password: "admin123"

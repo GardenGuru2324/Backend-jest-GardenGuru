@@ -20,7 +20,6 @@ describe("Login user", () => {
 		};
 
 		const expectedUser = {
-			_id: "666730eb1cca1f0d6338ec65",
 			userId: "jest_user_1",
 			userName: "jest_user_1",
 			password: "$2a$12$N.7.wzAYOuSFIJdTetqNhOFJpRRyfUnCS/qzAUK2nhDjne2uF7YtS",
