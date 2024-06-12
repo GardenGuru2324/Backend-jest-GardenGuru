@@ -32,4 +32,16 @@ describe("Fetches the information of a single plant", () => {
       expect(result.message).toEqual(obj.expect);
     });
   });
+
+  it(`Should return data of the plant`, async () => {
+    const plantId = "jest_plant_1_user_1";
+    const response = await client.getPlant(plantId);
+    const result = JSON.parse(response.text);
+    const allPlants = await client.getAllPlants();
+    const expectedPlant = JSON.parse(allPlants.text).filter(
+      (plant) => plant.plantId === plantId
+    );
+
+    expect(result).toEqual(expectedPlant);
+  });
 });
