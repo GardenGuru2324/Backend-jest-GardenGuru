@@ -8,6 +8,10 @@ export const getApi = async () => {
   return await agent.get(baseUrl);
 };
 
+export const getPlant = async (plantId) => {
+  return await agent.get(`${baseUrl}/plants/${plantId}`);
+};
+
 export const getAllPlants = async () => {
   return await agent.get(`${baseUrl}/plants`);
 };
