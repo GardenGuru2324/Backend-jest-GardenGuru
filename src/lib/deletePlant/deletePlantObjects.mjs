@@ -17,7 +17,7 @@ export const objectMessages = [
 		it: "delete plant with plantId jest_plant_1_user_1 of user and return correct message",
 		userId: "jest_user_1",
 		plantId: "jest_plant_1_user_1",
-		expect: succesMessages.SuccesfullyDeletePlant
+		expect: succesMessages.succesfullyDeletePlant
 	},
 	{
 		it: "not delete plant of user when user does not exists and return correct message",
