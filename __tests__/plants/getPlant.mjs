@@ -38,7 +38,7 @@ describe("Fetches the information of a single plant", () => {
     const response = await client.getPlant(plantId);
     const result = JSON.parse(response.text);
     const allPlants = await client.getAllPlants();
-    const expectedPlant = JSON.parse(allPlants.text).filter(
+    const expectedPlant = JSON.parse(allPlants.text).find(
       (plant) => plant.plantId === plantId
     );
 
