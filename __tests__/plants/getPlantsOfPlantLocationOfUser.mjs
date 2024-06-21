@@ -43,4 +43,19 @@ describe("Get all the plants of a certain location of an user", () => {
       expect(result.message).toEqual(obj.expect);
     });
   });
+
+  it(`Should return the plants of specific location, of specific user`, async () => {
+    const response = await client.getAllPlantsOfPlantLocationOfUser(
+      "jest_user_1",
+      "Living Room"
+    );
+    const result = JSON.parse(response.text);
+
+    const allPlants = await client.getAllPlants();
+    const expectedPlants = JSON.parse(allPlants.text)
+      .filter((plant) => plant.userId === "jest_user_1")
+      .filter((plant) => plant.locationId === "jest_plantLocation_1");
+
+    expect(result).toEqual(expectedPlants);
+  });
 });
