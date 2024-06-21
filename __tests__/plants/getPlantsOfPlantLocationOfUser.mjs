@@ -3,7 +3,10 @@ import { describe, it, expect } from "@jest/globals";
 import * as client from "../../src/clients/clients.mjs";
 import { initializeDatabase } from "../../src/database/initializeDatabase.mjs";
 import { clearDatabase } from "../../src/database/clearDatabase.mjs";
-import { objectStatusCodes } from "../../src/lib/getPlants/getPlantsOfPlantLocationObjects.mjs";
+import {
+  objectMessages,
+  objectStatusCodes,
+} from "../../src/lib/getPlants/getPlantsOfPlantLocationObjects.mjs";
 
 describe("Get all the plants of a certain location of an user", () => {
   beforeAll(async () => {
@@ -26,6 +29,18 @@ describe("Get all the plants of a certain location of an user", () => {
       );
 
       expect(result.statusCode).toEqual(obj.expect);
+    });
+  });
+
+  objectMessages.forEach((obj) => {
+    it(`Should ${obj.it}`, async () => {
+      const response = await client.getAllPlantsOfPlantLocationOfUser(
+        obj.userId,
+        obj.plantLocationName
+      );
+      const result = JSON.parse(response.text);
+
+      expect(result.message).toEqual(obj.expect);
     });
   });
 });

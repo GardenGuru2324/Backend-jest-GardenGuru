@@ -21,3 +21,17 @@ export const objectStatusCodes = [
   },
 ];
 
+export const objectMessages = [
+  {
+    it: "not get any plant of location that does not exist, of user and return correct error message",
+    userId: "jest_user_1",
+    plantLocationName: "does Not Exist",
+    expect: errorMessages.plantLocationNotFound,
+  },
+  {
+    it: "not get any plant of loction with no plants, of user and return correct error message",
+    userId: "jest_user_1",
+    plantLocationName: "Office",
+    expect: errorMessages.userHasNoPlantsOfLocation,
+  },
+];
