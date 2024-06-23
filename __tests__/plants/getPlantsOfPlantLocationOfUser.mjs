@@ -47,7 +47,7 @@ describe("Get all the plants of a certain location of an user", () => {
   it(`Should return the plants of specific location, of specific user`, async () => {
     const response = await client.getAllPlantsOfPlantLocationOfUser(
       "jest_user_1",
-      "Living Room"
+      "jest_plantLocation_1"
     );
     const result = JSON.parse(response.text);
 
