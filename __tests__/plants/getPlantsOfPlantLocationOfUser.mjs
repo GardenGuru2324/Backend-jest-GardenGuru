@@ -52,9 +52,11 @@ describe("Get all the plants of a certain location of an user", () => {
     const result = JSON.parse(response.text);
 
     const allPlants = await client.getAllPlants();
-    const expectedPlants = JSON.parse(allPlants.text)
-      .filter((plant) => plant.userId === "jest_user_1")
-      .filter((plant) => plant.locationId === "jest_plantLocation_1");
+    const expectedPlants = JSON.parse(allPlants.text).filter(
+      (plant) =>
+        plant.userId === "jest_user_1" &&
+        plant.locationId === "jest_plantLocation_1"
+    );
 
     expect(result).toEqual(expectedPlants);
   });
