@@ -33,6 +33,15 @@ export const getAllPlantsOfPlantLocationOfUser = async (userId, plantLocationNam
     });
 };
 
+export const getAllPlantsOfPlantNameOfUser = async (userId, plantName) => {
+  return await agent
+    .get(`${baseUrl}/user/${userId}/plants`)
+    .query(`search=${plantName}`)
+    .catch((error) => {
+      return error.response;
+    });
+};
+
 export const deletePlantOfUser = async (userId, plantId) => {
   return await agent.delete(`${baseUrl}/user/${userId}/plants/${plantId}`).catch((error) => {
     return error.response;
