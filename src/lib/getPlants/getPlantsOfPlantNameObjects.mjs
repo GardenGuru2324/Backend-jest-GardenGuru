@@ -23,7 +23,7 @@ export const objectStatusCodes = [
     it: "not get plants with search value, of user and return correct status code",
     userId: "jest_user_1",
     plantName: "does Not Exist",
-    expect: 404,
+    expect: 409,
   },
 ];
 
@@ -32,6 +32,6 @@ export const objectMessages = [
     it: "not get plants with search value, of user and return correct error message",
     userId: "jest_user_1",
     plantName: "does Not Exist",
-    expect: errorMessages.plantNotFound,
+    expect: errorMessages.userHasNoPlants,
   },
 ];
