@@ -31,31 +31,34 @@ describe("Get all the plants with plant name of an user", () => {
   });
 
   it(`Should return the plants with plant name, of specific user`, async () => {
-    const response = await client.getAllPlantsOfPlantNameOfUser("jest_user_1", "Monstera Deliciosa");
+    const searchValue = "Monstera Deliciosa";
+    const response = await client.getAllPlantsOfPlantNameOfUser("jest_user_1", searchValue);
     const result = JSON.parse(response.text);
 
     const allPlants = await client.getAllPlants();
-    const expectedPlants = JSON.parse(allPlants.text).filter((plant) => plant.userId === "jest_user_1" && plant.plantName === "Monstera Deliciosa");
+    const expectedPlants = JSON.parse(allPlants.text).filter((plant) => plant.userId === "jest_user_1" && plant.plantName.includes(searchValue));
 
     expect(result).toEqual(expectedPlants);
   });
 
   it(`Should return the plants with plant name if the name is small , of specific user`, async () => {
-    const response = await client.getAllPlantsOfPlantNameOfUser("jest_user_1", "Monstera");
+    const searchValue = "Monstera";
+    const response = await client.getAllPlantsOfPlantNameOfUser("jest_user_1", searchValue);
     const result = JSON.parse(response.text);
 
     const allPlants = await client.getAllPlants();
-    const expectedPlants = JSON.parse(allPlants.text).filter((plant) => plant.userId === "jest_user_1" && plant.plantName === "Monstera");
+    const expectedPlants = JSON.parse(allPlants.text).filter((plant) => plant.userId === "jest_user_1" && plant.plantName.includes(searchValue));
 
     expect(result).toEqual(expectedPlants);
   });
 
   it(`Should return the plants with plant name if the name is close to , of specific user`, async () => {
-    const response = await client.getAllPlantsOfPlantNameOfUser("jest_user_1", "Mons");
+    const searchValue = "Mons";
+    const response = await client.getAllPlantsOfPlantNameOfUser("jest_user_1", searchValue);
     const result = JSON.parse(response.text);
 
     const allPlants = await client.getAllPlants();
-    const expectedPlants = JSON.parse(allPlants.text).filter((plant) => plant.userId === "jest_user_1" && plant.plantName === "Mons");
+    const expectedPlants = JSON.parse(allPlants.text).filter((plant) => plant.userId === "jest_user_1" && plant.plantName.includes(searchValue));
 
     expect(result).toEqual(expectedPlants);
   });
