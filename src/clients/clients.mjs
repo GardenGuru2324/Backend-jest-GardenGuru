@@ -24,6 +24,15 @@ export const getAllPlantsOfUser = async (userId) => {
   });
 };
 
+export const getAllPlantsOfUserWithPagination = async (userId, page) => {
+  return await agent
+    .get(`${baseUrl}/user/${userId}/plants`)
+    .query(`page=${page}`)
+    .catch((error) => {
+      return error.response;
+    });
+};
+
 export const getAllPlantsOfPlantLocationOfUser = async (userId, plantLocationName) => {
   return await agent
     .get(`${baseUrl}/user/${userId}/plants`)
