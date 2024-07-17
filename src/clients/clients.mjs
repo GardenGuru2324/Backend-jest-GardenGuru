@@ -51,6 +51,15 @@ export const getAllPlantsOfPlantNameOfUser = async (userId, plantName) => {
     });
 };
 
+export const addPlant = async(newPlant) => {
+  return await agent
+    .post(`${baseUrl}/plant`)
+    .send(newPlant)
+    .catch((error) => {
+      return error.response
+    })
+}
+
 export const deletePlantOfUser = async (userId, plantId) => {
   return await agent.delete(`${baseUrl}/user/${userId}/plants/${plantId}`).catch((error) => {
     return error.response;
