@@ -19,13 +19,13 @@ describe("Add a plant", () => {
   });
 
   it.skip(`Should ${objectStatusCode.it}`, async () => {
-    const result = await client.registerUser(objectStatusCode.newPlant);
+    const result = await client.addPlant(objectStatusCode.newPlant);
 
     expect(result.statusCode).toEqual(objectStatusCode.expect);
   });
 
   it.skip(`Should ${objectMessage.it}`, async () => {
-    const result = await client.registerUser(objectMessage.newPlant);
+    const result = await client.addPlant(objectMessage.newPlant);
     const expectedResult = JSON.parse(result.text);
 
     expect(expectedResult.message).toEqual(objectMessage.expect);
