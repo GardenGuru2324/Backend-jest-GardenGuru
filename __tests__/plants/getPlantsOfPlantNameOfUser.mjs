@@ -7,12 +7,10 @@ import { objectMessages, objectStatusCodes } from "../../src/lib/getPlants/getPl
 describe("Get all the plants with plant name of an user", () => {
   beforeAll(async () => {
     await initializeDatabase("Plants");
-    await initializeDatabase("Users");
   });
 
   afterAll(async () => {
     await clearDatabase("Plants");
-    await clearDatabase("Users");
   });
 
   objectStatusCodes.forEach((obj) => {
@@ -36,7 +34,9 @@ describe("Get all the plants with plant name of an user", () => {
     const result = JSON.parse(response.text);
 
     const allPlants = await client.getAllPlants();
-    const expectedPlants = JSON.parse(allPlants.text).filter((plant) => plant.userId === "jest_user_1" && plant.plantName.includes(searchValue));
+    const expectedPlants = JSON.parse(allPlants.text).filter(
+      (plant) => plant.userId === "jest_user_1" && plant.plantName.includes(searchValue)
+    );
 
     expect(result).toEqual(expectedPlants);
   });
@@ -47,7 +47,9 @@ describe("Get all the plants with plant name of an user", () => {
     const result = JSON.parse(response.text);
 
     const allPlants = await client.getAllPlants();
-    const expectedPlants = JSON.parse(allPlants.text).filter((plant) => plant.userId === "jest_user_1" && plant.plantName.includes(searchValue));
+    const expectedPlants = JSON.parse(allPlants.text).filter(
+      (plant) => plant.userId === "jest_user_1" && plant.plantName.includes(searchValue)
+    );
 
     expect(result).toEqual(expectedPlants);
   });
@@ -58,7 +60,9 @@ describe("Get all the plants with plant name of an user", () => {
     const result = JSON.parse(response.text);
 
     const allPlants = await client.getAllPlants();
-    const expectedPlants = JSON.parse(allPlants.text).filter((plant) => plant.userId === "jest_user_1" && plant.plantName.includes(searchValue));
+    const expectedPlants = JSON.parse(allPlants.text).filter(
+      (plant) => plant.userId === "jest_user_1" && plant.plantName.includes(searchValue)
+    );
 
     expect(result).toEqual(expectedPlants);
   });

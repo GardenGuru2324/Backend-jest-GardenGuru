@@ -6,42 +6,38 @@ import { clearDatabase } from "../../src/database/clearDatabase.mjs";
 import { objectStatusCodes, objectMessages } from "../../src/lib/getPlants/getPlantsObjects.mjs";
 
 describe("Get plants of user", () => {
-	beforeAll(async () => {
-		await initializeDatabase("Plants");
-		await initializeDatabase("Users");
-	});
+  beforeAll(async () => {
+    await initializeDatabase("Plants");
+  });
 
-	afterAll(async () => {
-		await clearDatabase("Plants");
-		await clearDatabase("Users");
-	});
+  afterAll(async () => {
+    await clearDatabase("Plants");
+  });
 
-	objectStatusCodes.forEach((obj) => {
-		it(`Should ${obj.it}`, async () => {
-			const result = await client.getAllPlantsOfUser(obj.userId);
+  objectStatusCodes.forEach((obj) => {
+    it(`Should ${obj.it}`, async () => {
+      const result = await client.getAllPlantsOfUser(obj.userId);
 
-			expect(result.statusCode).toEqual(obj.expect);
-		});
-	});
+      expect(result.statusCode).toEqual(obj.expect);
+    });
+  });
 
-	objectMessages.forEach((obj) => {
-		it(`Should ${obj.it}`, async () => {
-			const response = await client.getAllPlantsOfUser(obj.userId);
-			const result = JSON.parse(response.text);
+  objectMessages.forEach((obj) => {
+    it(`Should ${obj.it}`, async () => {
+      const response = await client.getAllPlantsOfUser(obj.userId);
+      const result = JSON.parse(response.text);
 
-			expect(result.message).toEqual(obj.expect);
-		});
-	});
+      expect(result.message).toEqual(obj.expect);
+    });
+  });
 
-	it(`Should return the plants of specific user`, async () => {
-		const response = await client.getAllPlantsOfUser("jest_user_1");
-		const result = JSON.parse(response.text);
+  it(`Should return the plants of specific user`, async () => {
+    const response = await client.getAllPlantsOfUser("jest_user_1");
+    const result = JSON.parse(response.text);
 
-		const allPlants = await client.getAllPlants();
-		const expectedPlants = JSON.parse(allPlants.text).filter(
-			(plant) => plant.userId === "jest_user_1"
-		);
+    const allPlants = await client.getAllPlants();
+    const expectedPlants = JSON.parse(allPlants.text).filter((plant) => plant.userId === "jest_user_1");
 
-		expect(result).toEqual(expectedPlants);
-	});
+    expect(result).toEqual(expectedPlants);
+  });
 });

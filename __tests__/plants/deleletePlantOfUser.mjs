@@ -3,48 +3,46 @@ import * as client from "../../src/clients/clients.mjs";
 import { initializeDatabase } from "../../src/database/initializeDatabase.mjs";
 import { clearDatabase } from "../../src/database/clearDatabase.mjs";
 import {
-	objectForChecksPlantToBeDeleted,
-	objectMessages,
-	objectStatusCode
+  objectForChecksPlantToBeDeleted,
+  objectMessages,
+  objectStatusCode,
 } from "../../src/lib/deletePlant/deletePlantObjects.mjs";
 
 describe("Delete plant of user", () => {
-	beforeAll(async () => {
-		await initializeDatabase("Plants");
-		await initializeDatabase("Users");
-	});
+  beforeAll(async () => {
+    await initializeDatabase("Plants");
+  });
 
-	afterAll(async () => {
-		await clearDatabase("Plants");
-		await clearDatabase("Users");
-	});
+  afterAll(async () => {
+    await clearDatabase("Plants");
+  });
 
-	objectMessages.forEach((obj) => {
-		it(`Should ${obj.it}`, async () => {
-			const result = await client.deletePlantOfUser(obj.userId, obj.plantId);
+  objectMessages.forEach((obj) => {
+    it(`Should ${obj.it}`, async () => {
+      const result = await client.deletePlantOfUser(obj.userId, obj.plantId);
 
-			const expectedResult = JSON.parse(result.text);
+      const expectedResult = JSON.parse(result.text);
 
-			expect(expectedResult.message).toEqual(obj.expect);
-		});
-	});
+      expect(expectedResult.message).toEqual(obj.expect);
+    });
+  });
 
-	objectStatusCode.forEach((obj) => {
-		it(`Should ${obj.it}`, async () => {
-			const result = await client.deletePlantOfUser(obj.userId, obj.plantId);
+  objectStatusCode.forEach((obj) => {
+    it(`Should ${obj.it}`, async () => {
+      const result = await client.deletePlantOfUser(obj.userId, obj.plantId);
 
-			expect(result.statusCode).toEqual(obj.expect);
-		});
-	});
+      expect(result.statusCode).toEqual(obj.expect);
+    });
+  });
 
-	objectForChecksPlantToBeDeleted.forEach((obj) => {
-		it(`${obj.it}`, async () => {
-			const result = await client.getAllPlants();
+  objectForChecksPlantToBeDeleted.forEach((obj) => {
+    it(`${obj.it}`, async () => {
+      const result = await client.getAllPlants();
 
-			const expectedResult = JSON.parse(result.text);
-			const expectedPlant = expectedResult.find((plant) => plant.plantId === obj.plantId);
+      const expectedResult = JSON.parse(result.text);
+      const expectedPlant = expectedResult.find((plant) => plant.plantId === obj.plantId);
 
-			expect(expectedPlant).toBeUndefined();
-		});
-	});
+      expect(expectedPlant).toBeUndefined();
+    });
+  });
 });
