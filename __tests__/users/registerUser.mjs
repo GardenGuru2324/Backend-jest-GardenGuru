@@ -3,48 +3,40 @@ import * as client from "../../src/clients/clients.mjs";
 import { initializeDatabase } from "../../src/database/initializeDatabase.mjs";
 import { clearDatabase } from "../../src/database/clearDatabase.mjs";
 import {
-	objectMessages,
-	objectRegsiterSuccesUser,
-	objectStatusCode
+  objectMessages,
+  objectRegsiterSuccesUser,
+  objectStatusCode,
 } from "../../src/lib/registerUser/registerUserObjects.mjs";
 
 describe("Register user", () => {
-	beforeAll(async () => {
-		await initializeDatabase("Users");
-	});
+  objectRegsiterSuccesUser.forEach((obj) => {
+    // Werkt maar wil de database niet vervuilen om de 2 weken laten runnen!
+    it.skip(`Should ${obj.it}`, async () => {
+      const result = await client.registerUser(obj.newUser);
 
-	afterAll(async () => {
-		await clearDatabase("Users");
-	});
+      const expectedResult = JSON.parse(result.text);
 
-	objectRegsiterSuccesUser.forEach((obj) => {
-		// Werkt maar wil de database niet vervuilen om de 2 weken laten runnen!
-		it.skip(`Should ${obj.it}`, async () => {
-			const result = await client.registerUser(obj.newUser);
+      expect(expectedResult.email).toEqual(obj.expect.email);
+      expect(expectedResult.fullName).toEqual(obj.expect.fullName);
+      expect(result.statusCode).toBe(obj.expect.statusCode);
+    });
+  });
 
-			const expectedResult = JSON.parse(result.text);
+  objectMessages.forEach((obj) => {
+    it(`Should ${obj.it}`, async () => {
+      const result = await client.registerUser(obj.newUser);
 
-			expect(expectedResult.email).toEqual(obj.expect.email);
-			expect(expectedResult.fullName).toEqual(obj.expect.fullName);
-			expect(result.statusCode).toBe(obj.expect.statusCode);
-		});
-	});
+      const expectedResult = JSON.parse(result.text);
 
-	objectMessages.forEach((obj) => {
-		it(`Should ${obj.it}`, async () => {
-			const result = await client.registerUser(obj.newUser);
+      expect(expectedResult.message).toEqual(obj.expect);
+    });
+  });
 
-			const expectedResult = JSON.parse(result.text);
+  objectStatusCode.forEach((obj) => {
+    it(`Should ${obj.it}`, async () => {
+      const result = await client.registerUser(obj.newUser);
 
-			expect(expectedResult.message).toEqual(obj.expect);
-		});
-	});
-
-	objectStatusCode.forEach((obj) => {
-		it(`Should ${obj.it}`, async () => {
-			const result = await client.registerUser(obj.newUser);
-
-			expect(result.statusCode).toEqual(obj.expect);
-		});
-	});
+      expect(result.statusCode).toEqual(obj.expect);
+    });
+  });
 });

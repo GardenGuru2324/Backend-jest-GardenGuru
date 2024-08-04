@@ -8,12 +8,10 @@ import { errorMessages } from "../../src/errors/errors.mjs";
 describe("Get plants of user", () => {
   beforeAll(async () => {
     await initializeDatabase("Plants");
-    await initializeDatabase("Users");
   });
 
   afterAll(async () => {
     await clearDatabase("Plants");
-    await clearDatabase("Users");
   });
 
   it(`Should return correct message when user has no more plants`, async () => {
