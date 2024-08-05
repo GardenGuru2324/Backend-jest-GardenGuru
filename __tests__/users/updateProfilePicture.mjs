@@ -11,4 +11,15 @@ describe("Update profile picture", () => {
         });
       });
     
+      it(`Should return new profile picture`, async () => {
+        const userId = "jest_user_1";
+        const newProfilePicture = "https://picsum.photos/400";
+        
+        await client.updateProfilePicture(userId, newProfilePicture);
+
+        const userProfile = await client.getUserProfile(userId);
+        const currentProfilePicture = (JSON.parse(userProfile.text)).profilePicture;
+    
+        expect(newProfilePicture).toEqual(currentProfilePicture);
+      });
     });
