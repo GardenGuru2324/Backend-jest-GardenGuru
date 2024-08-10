@@ -33,10 +33,7 @@ export const getAllPlantsOfUserWithPagination = async (userId, page) => {
     });
 };
 
-export const getAllPlantsOfPlantLocationOfUser = async (
-  userId,
-  plantLocationName
-) => {
+export const getAllPlantsOfPlantLocationOfUser = async (userId, plantLocationName) => {
   return await agent
     .get(`${baseUrl}/user/${userId}/plants`)
     .query(`location=${plantLocationName}`)
@@ -64,11 +61,9 @@ export const addPlant = async (newPlant) => {
 };
 
 export const deletePlantOfUser = async (userId, plantId) => {
-  return await agent
-    .delete(`${baseUrl}/user/${userId}/plants/${plantId}`)
-    .catch((error) => {
-      return error.response;
-    });
+  return await agent.delete(`${baseUrl}/user/${userId}/plants/${plantId}`).catch((error) => {
+    return error.response;
+  });
 };
 
 export const loginUser = async (user) => {
@@ -96,8 +91,9 @@ export const getUserProfile = async (userId) => {
 };
 
 export const updateProfilePicture = async (userId, newProfilePicture) => {
-  return await (await agent.post(`${baseUrl}/user/changeProfilePicture`))
-    .send(userId, newProfilePicture)
+  return await agent
+    .put(`${baseUrl}/user/changeProfilePicture`)
+    .send({ userId: userId, newProfilePicture: newProfilePicture })
     .catch((error) => {
       return error.response;
     });
