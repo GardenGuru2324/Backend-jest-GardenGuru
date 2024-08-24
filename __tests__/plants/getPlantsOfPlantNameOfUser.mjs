@@ -34,11 +34,9 @@ describe("Get all the plants with plant name of an user", () => {
     const result = JSON.parse(response.text);
 
     const allPlants = await client.getAllPlants();
-    const expectedPlants = JSON.parse(allPlants.text).filter(
-      (plant) => plant.userId === "jest_user_1" && plant.plantName.includes(searchValue)
-    );
+    const expectedPlants = JSON.parse(allPlants.text).filter((plant) => plant.userId === "jest_user_1" && plant.plantName.includes(searchValue));
 
-    expect(result).toEqual(expectedPlants);
+    expect(result.userPlants).toEqual(expectedPlants);
   });
 
   it(`Should return the plants with plant name if the name is small , of specific user`, async () => {
@@ -47,11 +45,9 @@ describe("Get all the plants with plant name of an user", () => {
     const result = JSON.parse(response.text);
 
     const allPlants = await client.getAllPlants();
-    const expectedPlants = JSON.parse(allPlants.text).filter(
-      (plant) => plant.userId === "jest_user_1" && plant.plantName.includes(searchValue)
-    );
+    const expectedPlants = JSON.parse(allPlants.text).filter((plant) => plant.userId === "jest_user_1" && plant.plantName.includes(searchValue));
 
-    expect(result).toEqual(expectedPlants);
+    expect(result.userPlants).toEqual(expectedPlants);
   });
 
   it(`Should return the plants with plant name if the name is close to , of specific user`, async () => {
@@ -60,10 +56,8 @@ describe("Get all the plants with plant name of an user", () => {
     const result = JSON.parse(response.text);
 
     const allPlants = await client.getAllPlants();
-    const expectedPlants = JSON.parse(allPlants.text).filter(
-      (plant) => plant.userId === "jest_user_1" && plant.plantName.includes(searchValue)
-    );
+    const expectedPlants = JSON.parse(allPlants.text).filter((plant) => plant.userId === "jest_user_1" && plant.plantName.includes(searchValue));
 
-    expect(result).toEqual(expectedPlants);
+    expect(result.userPlants).toEqual(expectedPlants);
   });
 });

@@ -38,6 +38,6 @@ describe("Get plants of user", () => {
     const allPlants = await client.getAllPlants();
     const expectedPlants = JSON.parse(allPlants.text).filter((plant) => plant.userId === "jest_user_1");
 
-    expect(result).toEqual(expectedPlants);
+    expect(result.userPlants).toEqual(expectedPlants);
   });
 });
